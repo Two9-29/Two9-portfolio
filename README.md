@@ -36,13 +36,9 @@
     }
 
     /* ===== STACKED CARDS ===== */
-    .stack-section {
-      position: relative;
-    }
-
     .stack-container {
       position: relative;
-      height: 400vh; /* controls how long the stacking lasts */
+      height: 400vh;
     }
 
     .stack-sticky {
@@ -71,13 +67,88 @@
       padding: 1.75rem;
       display: flex;
       flex-direction: column;
-      transition: none; /* we control everything with JS */
+      cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s;
       will-change: transform, opacity;
+    }
+
+    /* RGB Glow when clicked */
+    .stack-card.rgb-active {
+      border: 2px solid transparent;
+      background: 
+        linear-gradient(#111113, #111113) padding-box,
+        linear-gradient(var(--rgb-angle, 0deg), #ff006e, #8338ec, #3a86ff, #06d6a0, #ffbe0b, #ff006e) border-box;
+      box-shadow: 
+        0 0 20px rgba(255, 0, 110, 0.4),
+        0 0 40px rgba(131, 56, 236, 0.3),
+        0 0 60px rgba(58, 134, 255, 0.2);
+      animation: rgbRotate 3s linear infinite;
+    }
+
+    @keyframes rgbRotate {
+      to { --rgb-angle: 360deg; }
+    }
+
+    @property --rgb-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
     }
 
     @media (min-width: 640px) {
       .stack-cards { height: 32rem; }
       .stack-card { padding: 2rem; }
+    }
+
+    /* ===== TV SCREEN ===== */
+    .tv-wrapper {
+      opacity: 0;
+      transform: scale(0.85) translateY(60px);
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tv-wrapper.visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .tv-frame {
+      background: linear-gradient(145deg, #1a1a1e, #0d0d0f);
+      border-radius: 1.25rem;
+      padding: 12px;
+      box-shadow: 
+        0 25px 50px -12px rgba(0,0,0,0.7),
+        inset 0 1px 1px rgba(255,255,255,0.05);
+      position: relative;
+    }
+
+    .tv-screen {
+      background: #000;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
+
+    .tv-stand {
+      width: 40%;
+      height: 14px;
+      background: linear-gradient(to bottom, #222, #111);
+      margin: 0 auto;
+      border-radius: 0 0 8px 8px;
+      position: relative;
+    }
+
+    .tv-stand::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 8px;
+      background: #0a0a0a;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -123,22 +194,19 @@
     </div>
   </section>
 
-  <!-- ==================== STACKED WORK SECTION ==================== -->
-  <section id="work" class="stack-section">
-    <div class="max-w-5xl mx-auto px-5 pt-20 pb-10">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-6">Selected Work</h2>
-      <p class="text-zinc-500 mb-10">Scroll down to explore the projects</p>
+  <!-- STACKED WORK -->
+  <section id="work">
+    <div class="max-w-5xl mx-auto px-5 pt-20 pb-8">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-3">Selected Work</h2>
+      <p class="text-zinc-500 text-sm">Scroll to stack • Click a card for RGB glow</p>
     </div>
 
     <div class="stack-container" id="stackContainer">
       <div class="stack-sticky">
         <div class="stack-cards" id="stackCards">
 
-          <!-- Card 1 -->
           <div class="stack-card" data-index="0">
-            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">
-              Project Image 01
-            </div>
+            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">Project Image 01</div>
             <h3 class="text-2xl font-semibold text-white mb-2">Project One</h3>
             <p class="text-zinc-400 text-sm mb-5 flex-1">A clean and modern web application focused on performance and beautiful interactions.</p>
             <div class="flex flex-wrap gap-2 text-xs">
@@ -148,11 +216,8 @@
             </div>
           </div>
 
-          <!-- Card 2 -->
           <div class="stack-card" data-index="1">
-            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">
-              Project Image 02
-            </div>
+            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">Project Image 02</div>
             <h3 class="text-2xl font-semibold text-white mb-2">Project Two</h3>
             <p class="text-zinc-400 text-sm mb-5 flex-1">Full-stack platform with real-time features and a refined user experience.</p>
             <div class="flex flex-wrap gap-2 text-xs">
@@ -162,11 +227,8 @@
             </div>
           </div>
 
-          <!-- Card 3 -->
           <div class="stack-card" data-index="2">
-            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">
-              Project Image 03
-            </div>
+            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">Project Image 03</div>
             <h3 class="text-2xl font-semibold text-white mb-2">Project Three</h3>
             <p class="text-zinc-400 text-sm mb-5 flex-1">Experimental interface exploring motion, 3D and creative coding.</p>
             <div class="flex flex-wrap gap-2 text-xs">
@@ -175,11 +237,8 @@
             </div>
           </div>
 
-          <!-- Card 4 -->
           <div class="stack-card" data-index="3">
-            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">
-              Project Image 04
-            </div>
+            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">Project Image 04</div>
             <h3 class="text-2xl font-semibold text-white mb-2">Project Four</h3>
             <p class="text-zinc-400 text-sm mb-5 flex-1">AI-powered tool that turns ideas into production-ready interfaces.</p>
             <div class="flex flex-wrap gap-2 text-xs">
@@ -193,15 +252,37 @@
     </div>
   </section>
 
+  <!-- TV / VIDEO SECTION -->
+  <section class="py-24 sm:py-32">
+    <div class="max-w-3xl mx-auto px-5">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-10 text-center">Featured Demo</h2>
+
+      <div class="tv-wrapper" id="tvWrapper">
+        <div class="tv-frame">
+          <div class="tv-screen">
+            <!-- Replace the src with your own YouTube video ID -->
+            <iframe 
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
+              title="Demo Video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        <div class="tv-stand"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- About -->
   <section id="about" class="py-24 sm:py-32 border-t border-white/5">
     <div class="max-w-5xl mx-auto px-5">
       <div class="grid md:grid-cols-5 gap-12 items-start">
         <div class="md:col-span-2">
           <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-8">About</h2>
-          <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-accent/20 to-emerald-900/20 border border-accent/20 flex items-center justify-center text-2xl font-display font-bold text-accent">
-            T9
-          </div>
+          <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-accent/20 to-emerald-900/20 border border-accent/20 flex items-center justify-center text-2xl font-display font-bold text-accent">T9</div>
         </div>
         <div class="md:col-span-3 space-y-5 text-lg text-zinc-400 leading-relaxed">
           <p>I’m TWO9 — a developer who cares about clean code, sharp design, and products that feel good to use.</p>
@@ -217,9 +298,7 @@
     <div class="max-w-5xl mx-auto px-5 text-center">
       <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-5">Let’s build something</h2>
       <p class="text-zinc-400 mb-10 max-w-md mx-auto">Have a project in mind or just want to say hi?</p>
-      <a href="mailto:hello@two9.dev" class="inline-flex px-8 py-4 bg-accent text-dark font-semibold rounded-full hover:bg-lime-400 transition">
-        hello@two9.dev
-      </a>
+      <a href="mailto:hello@two9.dev" class="inline-flex px-8 py-4 bg-accent text-dark font-semibold rounded-full hover:bg-lime-400 transition">hello@two9.dev</a>
       <div class="flex justify-center gap-8 mt-12 text-sm">
         <a href="#" class="hover:text-accent transition">GitHub</a>
         <a href="#" class="hover:text-accent transition">Twitter / X</a>
@@ -239,6 +318,17 @@
     menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
+    // ===== RGB GLOW ON CLICK =====
+    document.querySelectorAll('.stack-card').forEach(card => {
+      card.addEventListener('click', () => {
+        // Optional: only one card active at a time
+        document.querySelectorAll('.stack-card').forEach(c => {
+          if (c !== card) c.classList.remove('rgb-active');
+        });
+        card.classList.toggle('rgb-active');
+      });
+    });
+
     // ===== STACKED CARDS LOGIC =====
     const container = document.getElementById('stackContainer');
     const cards = document.querySelectorAll('.stack-card');
@@ -246,47 +336,44 @@
 
     function updateStack() {
       const rect = container.getBoundingClientRect();
-      const containerTop = rect.top;
-      const containerHeight = container.offsetHeight;
-      const viewportHeight = window.innerHeight;
-
-      // Progress from 0 → 1 while the sticky section is active
-      let progress = -containerTop / (containerHeight - viewportHeight);
-      progress = Math.min(Math.max(progress, 0), 1);
+      const progress = Math.min(Math.max(-rect.top / (container.offsetHeight - window.innerHeight), 0), 1);
 
       cards.forEach((card, i) => {
-        // How far this card is in the sequence
         const cardProgress = progress * (totalCards - 1) - i;
-
-        // Clamp between -1 and 1
         let p = Math.min(Math.max(cardProgress, -1), 1);
 
-        // Current card (on top)
         if (p <= 0) {
-          // Coming in from bottom or fully visible
-          const translateY = p * 80;          // slide up
+          const translateY = p * 80;
           const scale = 1 + p * 0.05;
-          const opacity = 1 + p * 0.3;
-
           card.style.transform = `translateY(${translateY}px) scale(${Math.max(scale, 0.9)})`;
-          card.style.opacity = Math.max(opacity, 0.4);
-          card.style.zIndex = totalCards - i;
+          card.style.opacity = Math.max(1 + p * 0.3, 0.4);
         } else {
-          // Already passed → move up and shrink (stacking behind)
           const translateY = -p * 40;
           const scale = 1 - p * 0.08;
-          const opacity = 1 - p * 0.4;
-
           card.style.transform = `translateY(${translateY}px) scale(${scale})`;
-          card.style.opacity = Math.max(opacity, 0.3);
-          card.style.zIndex = totalCards - i;
+          card.style.opacity = Math.max(1 - p * 0.4, 0.3);
         }
+        card.style.zIndex = totalCards - i;
       });
     }
 
     window.addEventListener('scroll', updateStack, { passive: true });
     window.addEventListener('resize', updateStack);
-    updateStack(); // initial call
+    updateStack();
+
+    // ===== TV POPUP ANIMATION =====
+    const tvWrapper = document.getElementById('tvWrapper');
+    const tvObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tvWrapper.classList.add('visible');
+        } else {
+          tvWrapper.classList.remove('visible'); // reverse when scrolling up
+        }
+      });
+    }, { threshold: 0.25 });
+
+    tvObserver.observe(tvWrapper);
   </script>
 </body>
 </html>
