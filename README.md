@@ -221,4 +221,173 @@
             <p class="text-zinc-400 text-sm mb-5 flex-1">A clean and modern web application focused on performance and beautiful interactions.</p>
             <div class="flex flex-wrap gap-2 text-xs">
               <span class="px-2.5 py-1 bg-white/5 rounded-full">React</span>
-              <span class="px-2.5 py-1 bg
+              <span class="px-2.5 py-1 bg-white/5 rounded-full">Tailwind</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full">Next.js</span>
+            </div>
+          </div>
+
+          <div class="stack-card" data-index="1">
+            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">Project Image 02</div>
+            <h3 class="text-2xl font-semibold text-white mb-2">Project Two</h3>
+            <p class="text-zinc-400 text-sm mb-5 flex-1">Full-stack platform with real-time features and a refined user experience.</p>
+            <div class="flex flex-wrap gap-2 text-xs">
+              <span class="px-2.5 py-1 bg-white/5 rounded-full">TypeScript</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full">Node</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full">Postgres</span>
+            </div>
+          </div>
+
+          <div class="stack-card" data-index="2">
+            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">Project Image 03</div>
+            <h3 class="text-2xl font-semibold text-white mb-2">Project Three</h3>
+            <p class="text-zinc-400 text-sm mb-5 flex-1">Experimental interface exploring motion, 3D and creative coding.</p>
+            <div class="flex flex-wrap gap-2 text-xs">
+              <span class="px-2.5 py-1 bg-white/5 rounded-full">Three.js</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full">Framer Motion</span>
+            </div>
+          </div>
+
+          <div class="stack-card" data-index="3">
+            <div class="aspect-video bg-zinc-900 rounded-xl mb-5 flex items-center justify-center text-zinc-600 text-sm">Project Image 04</div>
+            <h3 class="text-2xl font-semibold text-white mb-2">Project Four</h3>
+            <p class="text-zinc-400 text-sm mb-5 flex-1">AI-powered tool that turns ideas into production-ready interfaces.</p>
+            <div class="flex flex-wrap gap-2 text-xs">
+              <span class="px-2.5 py-1 bg-white/5 rounded-full">Python</span>
+              <span class="px-2.5 py-1 bg-white/5 rounded-full">AI</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TV SCREEN (no title, just the screen) -->
+  <div class="py-32 sm:py-40">
+    <div class="max-w-3xl mx-auto px-5">
+      <div class="tv-wrapper" id="tvWrapper">
+        <div class="tv-frame">
+          <div class="tv-screen">
+  <video 
+    src="video.mp4"
+    autoplay
+    loop
+    playsinline
+    class="w-full h-full object-cover"
+  ></video>
+          </div>
+        </div>
+        <div class="tv-stand"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section id="about" class="py-24 sm:py-32 border-t border-white/5">
+    <div class="max-w-5xl mx-auto px-5">
+      <div class="grid md:grid-cols-5 gap-12 items-start">
+        <div class="md:col-span-2">
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-8">About</h2>
+          <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-accent/20 to-emerald-900/20 border border-accent/20 flex items-center justify-center text-2xl font-display font-bold text-accent">T9</div>
+        </div>
+        <div class="md:col-span-3 space-y-5 text-lg text-zinc-400 leading-relaxed">
+          <p>I’m TWO9 — a developer who cares about clean code, sharp design, and products that feel good to use.</p>
+          <p>I work across the stack but love the frontend the most: fast interfaces, smooth interactions, and thoughtful details.</p>
+          <p>Currently open to new opportunities and interesting collaborations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-24 sm:py-32 border-t border-white/5">
+    <div class="max-w-5xl mx-auto px-5 text-center">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-5">Let’s build something</h2>
+      <p class="text-zinc-400 mb-10 max-w-md mx-auto">Have a project in mind or just want to say hi?</p>
+      <a href="mailto:hello@two9.dev" class="inline-flex px-8 py-4 bg-accent text-dark font-semibold rounded-full hover:bg-lime-400 transition">hello@two9.dev</a>
+      <div class="flex justify-center gap-8 mt-12 text-sm">
+        <a href="#" class="hover:text-accent transition">GitHub</a>
+        <a href="#" class="hover:text-accent transition">Twitter / X</a>
+        <a href="#" class="hover:text-accent transition">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-8 border-t border-white/5 text-center text-sm text-zinc-600">
+    © 2026 TWO9. Built with intention.
+  </footer>
+
+  <script>
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+  // ===== RGB GLOW (click + touch) - FIXED =====
+  const cards = document.querySelectorAll('.stack-card');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      // Turn off all others
+      cards.forEach(c => c.classList.remove('rgb-active'));
+      // Turn on current
+      card.classList.add('rgb-active');
+    });
+  });
+
+  // ===== STACKED CARDS + AUTO TURN OFF GLOW =====
+  const container = document.getElementById('stackContainer');
+  const totalCards = cards.length;
+  let currentFront = 0;
+
+  function updateStack() {
+    const rect = container.getBoundingClientRect();
+    const progress = Math.min(Math.max(-rect.top / (container.offsetHeight - window.innerHeight), 0), 1);
+
+    // Which card is currently in front
+    const frontIndex = Math.min(Math.floor(progress * (totalCards - 1) + 0.5), totalCards - 1);
+
+    // If front card changed → remove glow from previous cards
+    if (frontIndex !== currentFront) {
+      cards.forEach(c => c.classList.remove('rgb-active'));
+      currentFront = frontIndex;
+    }
+
+    cards.forEach((card, i) => {
+      const cardProgress = progress * (totalCards - 1) - i;
+      let p = Math.min(Math.max(cardProgress, -1), 1);
+
+      if (p <= 0) {
+        const translateY = p * 80;
+        const scale = 1 + p * 0.05;
+        card.style.transform = `translateY(${translateY}px) scale(${Math.max(scale, 0.9)})`;
+        card.style.opacity = Math.max(1 + p * 0.3, 0.4);
+      } else {
+        const translateY = -p * 40;
+        const scale = 1 - p * 0.08;
+        card.style.transform = `translateY(${translateY}px) scale(${scale})`;
+        card.style.opacity = Math.max(1 - p * 0.4, 0.3);
+      }
+      card.style.zIndex = totalCards - i;
+    });
+  }
+
+  window.addEventListener('scroll', updateStack, { passive: true });
+  window.addEventListener('resize', updateStack);
+  updateStack();
+
+  // ===== TV SLIDE =====
+  const tvWrapper = document.getElementById('tvWrapper');
+  const tvObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tvWrapper.classList.add('visible');
+      } else {
+        tvWrapper.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  tvObserver.observe(tvWrapper);
+</script>
