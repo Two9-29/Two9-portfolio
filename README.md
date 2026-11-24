@@ -70,18 +70,19 @@
       cursor: pointer;
       transition: border-color 0.3s, box-shadow 0.3s;
       will-change: transform, opacity;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* RGB Glow when clicked */
+    /* RGB Glow */
     .stack-card.rgb-active {
       border: 2px solid transparent;
       background: 
         linear-gradient(#111113, #111113) padding-box,
         linear-gradient(var(--rgb-angle, 0deg), #ff006e, #8338ec, #3a86ff, #06d6a0, #ffbe0b, #ff006e) border-box;
       box-shadow: 
-        0 0 20px rgba(255, 0, 110, 0.4),
-        0 0 40px rgba(131, 56, 236, 0.3),
-        0 0 60px rgba(58, 134, 255, 0.2);
+        0 0 25px rgba(255, 0, 110, 0.5),
+        0 0 50px rgba(131, 56, 236, 0.35),
+        0 0 80px rgba(58, 134, 255, 0.25);
       animation: rgbRotate 3s linear infinite;
     }
 
@@ -103,50 +104,59 @@
     /* ===== TV SCREEN ===== */
     .tv-wrapper {
       opacity: 0;
-      transform: scale(0.85) translateY(60px);
-      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(120px) scale(0.9);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .tv-wrapper.visible {
       opacity: 1;
-      transform: scale(1) translateY(0);
+      transform: translateY(0) scale(1);
     }
 
     .tv-frame {
       background: linear-gradient(145deg, #1a1a1e, #0d0d0f);
       border-radius: 1.25rem;
-      padding: 12px;
+      padding: 14px;
       box-shadow: 
-        0 25px 50px -12px rgba(0,0,0,0.7),
+        0 30px 60px -15px rgba(0,0,0,0.8),
         inset 0 1px 1px rgba(255,255,255,0.05);
-      position: relative;
     }
 
     .tv-screen {
-      background: #000;
-      border-radius: 0.75rem;
+      background: #050505;
+      border-radius: 0.8rem;
       overflow: hidden;
       aspect-ratio: 16 / 9;
       position: relative;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+    }
+
+    /* subtle screen glow */
+    .tv-screen::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(163,230,53,0.03) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .tv-stand {
-      width: 40%;
-      height: 14px;
+      width: 38%;
+      height: 12px;
       background: linear-gradient(to bottom, #222, #111);
       margin: 0 auto;
-      border-radius: 0 0 8px 8px;
+      border-radius: 0 0 6px 6px;
       position: relative;
     }
 
     .tv-stand::after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -7px;
       left: 50%;
       transform: translateX(-50%);
-      width: 70%;
-      height: 8px;
+      width: 65%;
+      height: 7px;
       background: #0a0a0a;
       border-radius: 4px;
     }
@@ -198,7 +208,7 @@
   <section id="work">
     <div class="max-w-5xl mx-auto px-5 pt-20 pb-8">
       <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-3">Selected Work</h2>
-      <p class="text-zinc-500 text-sm">Scroll to stack • Click a card for RGB glow</p>
+      <p class="text-zinc-500 text-sm">Scroll to stack • Tap a card for RGB glow</p>
     </div>
 
     <div class="stack-container" id="stackContainer">
@@ -252,29 +262,17 @@
     </div>
   </section>
 
-  <!-- TV / VIDEO SECTION -->
-  <section class="py-24 sm:py-32">
+  <!-- TV SCREEN (no title, just the screen) -->
+  <div class="py-32 sm:py-40">
     <div class="max-w-3xl mx-auto px-5">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-10 text-center">Featured Demo</h2>
-
       <div class="tv-wrapper" id="tvWrapper">
         <div class="tv-frame">
-          <div class="tv-screen">
-            <!-- Replace the src with your own YouTube video ID -->
-            <iframe 
-              class="w-full h-full"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
-              title="Demo Video"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
+          <div class="tv-screen"></div>
         </div>
         <div class="tv-stand"></div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- About -->
   <section id="about" class="py-24 sm:py-32 border-t border-white/5">
@@ -318,25 +316,39 @@
     menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
-    // ===== RGB GLOW ON CLICK =====
-    document.querySelectorAll('.stack-card').forEach(card => {
-      card.addEventListener('click', () => {
-        // Optional: only one card active at a time
-        document.querySelectorAll('.stack-card').forEach(c => {
-          if (c !== card) c.classList.remove('rgb-active');
-        });
-        card.classList.toggle('rgb-active');
-      });
+    // ===== RGB GLOW (click + touch) =====
+    const cards = document.querySelectorAll('.stack-card');
+
+    cards.forEach(card => {
+      const activate = (e) => {
+        e.preventDefault();
+        // Turn off all others
+        cards.forEach(c => c.classList.remove('rgb-active'));
+        // Toggle current
+        card.classList.add('rgb-active');
+      };
+
+      card.addEventListener('click', activate);
+      card.addEventListener('touchstart', activate, { passive: false });
     });
 
-    // ===== STACKED CARDS LOGIC =====
+    // ===== STACKED CARDS + AUTO TURN OFF GLOW =====
     const container = document.getElementById('stackContainer');
-    const cards = document.querySelectorAll('.stack-card');
     const totalCards = cards.length;
+    let currentFront = 0;
 
     function updateStack() {
       const rect = container.getBoundingClientRect();
       const progress = Math.min(Math.max(-rect.top / (container.offsetHeight - window.innerHeight), 0), 1);
+
+      // Calculate which card is currently in front
+      const frontIndex = Math.min(Math.floor(progress * (totalCards - 1) + 0.5), totalCards - 1);
+
+      // If the front card changed → turn off previous glow
+      if (frontIndex !== currentFront) {
+        cards.forEach(c => c.classList.remove('rgb-active'));
+        currentFront = frontIndex;
+      }
 
       cards.forEach((card, i) => {
         const cardProgress = progress * (totalCards - 1) - i;
@@ -361,17 +373,17 @@
     window.addEventListener('resize', updateStack);
     updateStack();
 
-    // ===== TV POPUP ANIMATION =====
+    // ===== TV AGGRESSIVE SLIDE =====
     const tvWrapper = document.getElementById('tvWrapper');
     const tvObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           tvWrapper.classList.add('visible');
         } else {
-          tvWrapper.classList.remove('visible'); // reverse when scrolling up
+          tvWrapper.classList.remove('visible');
         }
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.15 });
 
     tvObserver.observe(tvWrapper);
   </script>
