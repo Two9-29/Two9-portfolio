@@ -19,7 +19,7 @@
           colors: {
             dark: '#09090b',
             card: '#111113',
-            accent: '#a3e635',
+            accent: '#ffffff',   // ← changed from green to white
           }
         }
       }
@@ -108,6 +108,10 @@
       transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    .tv-wrapper.from-top {
+      transform: translateY(-120px) scale(0.9);
+    }
+
     .tv-wrapper.visible {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -131,12 +135,11 @@
       box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
     }
 
-    /* subtle screen glow */
     .tv-screen::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(163,230,53,0.03) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(255,255,255,0.04) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -169,9 +172,9 @@
     <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
       <a href="#" class="font-display font-bold text-xl text-white">TWO9</a>
       <div class="hidden sm:flex gap-8 text-sm">
-        <a href="#work" class="hover:text-accent transition">Work</a>
-        <a href="#about" class="hover:text-accent transition">About</a>
-        <a href="#contact" class="hover:text-accent transition">Contact</a>
+        <a href="#work" class="hover:text-white transition">Work</a>
+        <a href="#about" class="hover:text-white transition">About</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
       </div>
       <button id="menuBtn" class="sm:hidden text-white p-2">
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -191,15 +194,15 @@
   <!-- Hero -->
   <section class="min-h-screen flex items-center pt-20">
     <div class="max-w-5xl mx-auto px-5 w-full">
-      <p class="text-accent font-medium mb-3 text-sm">Hey, I’m</p>
+      <p class="text-white font-medium mb-3 text-sm">Hey, I’m</p>
       <h1 class="font-display text-5xl sm:text-7xl font-bold text-white mb-6">TWO9</h1>
       <p class="text-lg sm:text-2xl text-zinc-400 max-w-xl leading-relaxed mb-10">
         Building clean digital experiences.<br class="hidden sm:block">
         Developer • Designer • Creator
       </p>
       <div class="flex flex-wrap gap-4">
-        <a href="#work" class="px-7 py-3.5 bg-accent text-dark font-semibold rounded-full hover:bg-lime-400 transition">View Work</a>
-        <a href="#contact" class="px-7 py-3.5 border border-white/20 rounded-full hover:border-accent hover:text-accent transition">Get in touch</a>
+        <a href="#work" class="px-7 py-3.5 bg-white text-dark font-semibold rounded-full hover:bg-zinc-200 transition">View Work</a>
+        <a href="#contact" class="px-7 py-3.5 border border-white/20 rounded-full hover:border-white hover:text-white transition">Get in touch</a>
       </div>
     </div>
   </section>
@@ -262,19 +265,20 @@
     </div>
   </section>
 
-  <!-- TV SCREEN (no title, just the screen) -->
+  <!-- TV SCREEN -->
   <div class="py-32 sm:py-40">
     <div class="max-w-3xl mx-auto px-5">
       <div class="tv-wrapper" id="tvWrapper">
         <div class="tv-frame">
           <div class="tv-screen">
-  <video 
-    src="video.mp4"
-    autoplay
-    loop
-    playsinline
-    class="w-full h-full object-cover"
-  ></video>
+            <video 
+              src="video.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover"
+            ></video>
           </div>
         </div>
         <div class="tv-stand"></div>
@@ -288,7 +292,7 @@
       <div class="grid md:grid-cols-5 gap-12 items-start">
         <div class="md:col-span-2">
           <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-8">About</h2>
-          <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-accent/20 to-emerald-900/20 border border-accent/20 flex items-center justify-center text-2xl font-display font-bold text-accent">T9</div>
+          <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 flex items-center justify-center text-2xl font-display font-bold text-white">T9</div>
         </div>
         <div class="md:col-span-3 space-y-5 text-lg text-zinc-400 leading-relaxed">
           <p>I’m TWO9 — a developer who cares about clean code, sharp design, and products that feel good to use.</p>
@@ -304,11 +308,11 @@
     <div class="max-w-5xl mx-auto px-5 text-center">
       <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-5">Let’s build something</h2>
       <p class="text-zinc-400 mb-10 max-w-md mx-auto">Have a project in mind or just want to say hi?</p>
-      <a href="mailto:hello@two9.dev" class="inline-flex px-8 py-4 bg-accent text-dark font-semibold rounded-full hover:bg-lime-400 transition">hello@two9.dev</a>
+      <a href="mailto:hello@two9.dev" class="inline-flex px-8 py-4 bg-white text-dark font-semibold rounded-full hover:bg-zinc-200 transition">hello@two9.dev</a>
       <div class="flex justify-center gap-8 mt-12 text-sm">
-        <a href="#" class="hover:text-accent transition">GitHub</a>
-        <a href="#" class="hover:text-accent transition">Twitter / X</a>
-        <a href="#" class="hover:text-accent transition">LinkedIn</a>
+        <a href="#" class="hover:text-white transition">GitHub</a>
+        <a href="#" class="hover:text-white transition">Twitter / X</a>
+        <a href="#" class="hover:text-white transition">LinkedIn</a>
       </div>
     </div>
   </section>
@@ -318,76 +322,95 @@
   </footer>
 
   <script>
-  // Mobile menu
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-  mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
-  // ===== RGB GLOW (click + touch) - FIXED =====
-  const cards = document.querySelectorAll('.stack-card');
+    // ===== RGB GLOW =====
+    const cards = document.querySelectorAll('.stack-card');
 
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      // Turn off all others
-      cards.forEach(c => c.classList.remove('rgb-active'));
-      // Turn on current
-      card.classList.add('rgb-active');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        cards.forEach(c => c.classList.remove('rgb-active'));
+        card.classList.add('rgb-active');
+      });
     });
-  });
 
-  // ===== STACKED CARDS + AUTO TURN OFF GLOW =====
-  const container = document.getElementById('stackContainer');
-  const totalCards = cards.length;
-  let currentFront = 0;
+    // ===== STACKED CARDS =====
+    const container = document.getElementById('stackContainer');
+    const totalCards = cards.length;
+    let currentFront = 0;
 
-  function updateStack() {
-    const rect = container.getBoundingClientRect();
-    const progress = Math.min(Math.max(-rect.top / (container.offsetHeight - window.innerHeight), 0), 1);
+    function updateStack() {
+      const rect = container.getBoundingClientRect();
+      const progress = Math.min(Math.max(-rect.top / (container.offsetHeight - window.innerHeight), 0), 1);
 
-    // Which card is currently in front
-    const frontIndex = Math.min(Math.floor(progress * (totalCards - 1) + 0.5), totalCards - 1);
+      const frontIndex = Math.min(Math.floor(progress * (totalCards - 1) + 0.5), totalCards - 1);
 
-    // If front card changed → remove glow from previous cards
-    if (frontIndex !== currentFront) {
-      cards.forEach(c => c.classList.remove('rgb-active'));
-      currentFront = frontIndex;
+      if (frontIndex !== currentFront) {
+        cards.forEach(c => c.classList.remove('rgb-active'));
+        currentFront = frontIndex;
+      }
+
+      cards.forEach((card, i) => {
+        const cardProgress = progress * (totalCards - 1) - i;
+        let p = Math.min(Math.max(cardProgress, -1), 1);
+
+        if (p <= 0) {
+          const translateY = p * 80;
+          const scale = 1 + p * 0.05;
+          card.style.transform = `translateY(${translateY}px) scale(${Math.max(scale, 0.9)})`;
+          card.style.opacity = Math.max(1 + p * 0.3, 0.4);
+        } else {
+          const translateY = -p * 40;
+          const scale = 1 - p * 0.08;
+          card.style.transform = `translateY(${translateY}px) scale(${scale})`;
+          card.style.opacity = Math.max(1 - p * 0.4, 0.3);
+        }
+        card.style.zIndex = totalCards - i;
+      });
     }
 
-    cards.forEach((card, i) => {
-      const cardProgress = progress * (totalCards - 1) - i;
-      let p = Math.min(Math.max(cardProgress, -1), 1);
+    window.addEventListener('scroll', updateStack, { passive: true });
+    window.addEventListener('resize', updateStack);
+    updateStack();
 
-      if (p <= 0) {
-        const translateY = p * 80;
-        const scale = 1 + p * 0.05;
-        card.style.transform = `translateY(${translateY}px) scale(${Math.max(scale, 0.9)})`;
-        card.style.opacity = Math.max(1 + p * 0.3, 0.4);
-      } else {
-        const translateY = -p * 40;
-        const scale = 1 - p * 0.08;
-        card.style.transform = `translateY(${translateY}px) scale(${scale})`;
-        card.style.opacity = Math.max(1 - p * 0.4, 0.3);
-      }
-      card.style.zIndex = totalCards - i;
-    });
-  }
+    // ===== TV DIRECTION-AWARE ANIMATION =====
+    const tvWrapper = document.getElementById('tvWrapper');
+    let lastScrollY = window.scrollY;
 
-  window.addEventListener('scroll', updateStack, { passive: true });
-  window.addEventListener('resize', updateStack);
-  updateStack();
+    const tvObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const scrollingDown = window.scrollY > lastScrollY;
 
-  // ===== TV SLIDE =====
-  const tvWrapper = document.getElementById('tvWrapper');
-  const tvObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        tvWrapper.classList.add('visible');
-      } else {
-        tvWrapper.classList.remove('visible');
-      }
-    });
-  }, { threshold: 0.15 });
+        if (entry.isIntersecting) {
+          if (scrollingDown) {
+            tvWrapper.classList.remove('from-top');
+          } else {
+            tvWrapper.classList.add('from-top');
+          }
+          void tvWrapper.offsetWidth;
+          tvWrapper.classList.add('visible');
+        } else {
+          tvWrapper.classList.remove('visible');
+          if (scrollingDown) {
+            tvWrapper.classList.remove('from-top');
+          } else {
+            tvWrapper.classList.add('from-top');
+          }
+        }
 
-  tvObserver.observe(tvWrapper);
-</script>
+        lastScrollY = window.scrollY;
+      });
+    }, { threshold: 0.2 });
+
+    tvObserver.observe(tvWrapper);
+
+    window.addEventListener('scroll', () => {
+      lastScrollY = window.scrollY;
+    }, { passive: true });
+  </script>
+</body>
+</html>
