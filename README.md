@@ -19,7 +19,7 @@
           colors: {
             dark: '#09090b',
             card: '#111113',
-            accent: '#ffffff',   // ← changed from green to white
+            accent: '#ffffff',
           }
         }
       }
@@ -35,7 +35,6 @@
       background: rgba(9, 9, 11, 0.85);
     }
 
-    /* ===== STACKED CARDS ===== */
     .stack-container {
       position: relative;
       height: 400vh;
@@ -73,7 +72,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* RGB Glow */
     .stack-card.rgb-active {
       border: 2px solid transparent;
       background: 
@@ -101,7 +99,6 @@
       .stack-card { padding: 2rem; }
     }
 
-    /* ===== TV SCREEN ===== */
     .tv-wrapper {
       opacity: 0;
       transform: translateY(120px) scale(0.9);
@@ -265,7 +262,7 @@
     </div>
   </section>
 
-  <!-- TV SCREEN -->
+  <!-- TV -->
   <div class="py-32 sm:py-40">
     <div class="max-w-3xl mx-auto px-5">
       <div class="tv-wrapper" id="tvWrapper">
@@ -322,13 +319,11 @@
   </footer>
 
   <script>
-    // Mobile menu
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
     mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
-    // ===== RGB GLOW =====
     const cards = document.querySelectorAll('.stack-card');
 
     cards.forEach(card => {
@@ -338,7 +333,6 @@
       });
     });
 
-    // ===== STACKED CARDS =====
     const container = document.getElementById('stackContainer');
     const totalCards = cards.length;
     let currentFront = 0;
@@ -377,7 +371,6 @@
     window.addEventListener('resize', updateStack);
     updateStack();
 
-    // ===== TV DIRECTION-AWARE ANIMATION =====
     const tvWrapper = document.getElementById('tvWrapper');
     let lastScrollY = window.scrollY;
 
@@ -401,7 +394,6 @@
             tvWrapper.classList.add('from-top');
           }
         }
-
         lastScrollY = window.scrollY;
       });
     }, { threshold: 0.2 });
